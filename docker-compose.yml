@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+  ss:
+    container_name: ${COMPOSE_PROJECT_NAME}_ss
+    image: ubuntu:16.04
+    build:
+      context: .
+      dockerfile: .docker/ss/Dockerfile
+#    links:
+#      - redis
+#    depends_on:
+#      - redis
+#      - rabbitmq
+#      - mariadb
+#      - mongodb
+    volumes:
+    #parity
+      #config
+      - ./.docker/ss/config.toml
+
+      #bin
+      - ./.docker/ss/bin/parity
+
+      #lib
+      - ./.docker/ss/bin/libcrypto.so.1.1
+      - ./.docker/ss/bin/libssl.so.1.1
+
+
+#    environment:
+#      DB_DRIVER: ${DB_DRIVER}
+#      DB_HOST: ${DB_HOST}
+#      DB_USER_NAME: ${MYSQL_USER}
+#      DB_USER_PASSWORD: ${MYSQL_PASSWORD}
+#      DB_NAME: ${MYSQL_DATABASE}
+#      DB_PREFIX: ${DB_PREFIX}
+#      BROCKER_HOST: ${BROCKER_HOST}
+#      BROCKER_PORT: ${RABBITMQ_CONNECTION_PORT}
+#      BROCKER_USER_NAME: ${RABBITMQ_DEFAULT_USER}
+#      BROCKER_USER_PASS: ${RABBITMQ_DEFAULT_PASS}
+#      REDIS_HOST: "redis"
+#      REDIS_PORT: ${REDIS_PORT}
+#      REDIS_DB: 2
+    ports:
+     - 8080:8080
+     - 8082:8082
+     - 8545:8545
+     - 8180:8180
